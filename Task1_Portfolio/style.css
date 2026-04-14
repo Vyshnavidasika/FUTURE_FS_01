@@ -8,7 +8,7 @@
   border: none;
   outline: none;
   scroll-behavior: smooth;
-  font-family: "Poppins", sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 :root {
@@ -19,7 +19,7 @@
 }
 
 html {
-  font-size: 60%;
+  font-size: 80%;
   overflow-x: hidden;
 }
 
@@ -101,7 +101,7 @@ section {
   display: flex;
   flex-direction: row;
   align-items: center;
-  text-align: left;
+  text-align: center;
   justify-content: space-evenly;
   margin-top: 3rem;
 }
@@ -284,7 +284,6 @@ span {
 .education h2 {
   margin-bottom: 5rem;
 }
-
 .timeline-items {
   max-width: 1200px;
   margin: auto;
@@ -383,7 +382,20 @@ span {
 
 .services h2 {
   margin-bottom: 5rem;
-  color: white;
+  color: black;
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+}
+/* ===== SERVICES FIXED ===== */
+
+.services h2 {
+  margin-bottom: 5rem;
+  color: black;
 }
 
 .services-container {
@@ -400,6 +412,9 @@ span {
   border: 5px solid transparent;
   cursor: pointer;
   transition: 0.4s ease-in-out;
+
+  /* 🔥 FIX ADDED HERE */
+  color: black;
 }
 
 .service-box:hover {
@@ -419,10 +434,12 @@ span {
   padding: 5rem 5rem;
 }
 
+/* 🔥 FORCE TEXT BLACK (IMPORTANT) */
 .service-info h4 {
   font-size: 3rem;
   font-weight: 800;
   line-height: 2;
+  color: black;
 }
 
 .service-info p {
@@ -431,7 +448,10 @@ span {
   line-height: 1.7;
   max-height: 100px;
   margin: auto;
+  color: black;
 }
+
+
 
 .Certifications {
   background: var(--second-bg-color);

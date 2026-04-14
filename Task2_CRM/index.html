@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini CRM</title>
+
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial, sans-serif;background:#0f172a;color:#fff}
+    .container{max-width:900px;margin:auto;padding:20px}
+
+    h1{text-align:center;color:#38bdf8;margin-bottom:10px}
+
+    .subtitle{
+      text-align:center;
+      margin-bottom:20px;
+      color:#94a3b8;
+    }
+
+    .card{
+      background:#020617;
+      padding:16px;
+      border-radius:10px;
+      margin-bottom:16px;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:10px;
+      margin:8px 0;
+      border-radius:6px;
+      border:none;
+    }
+
+    button{
+      background:#38bdf8;
+      border:none;
+      padding:10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    button:hover{
+      opacity:0.9;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:#020617;
+    }
+
+    th,td{
+      padding:10px;
+      border-bottom:1px solid #1e293b;
+      text-align:center;
+    }
+
+    th{color:#38bdf8}
+
+    .btn{
+      padding:6px 10px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    .edit{background:orange;color:#fff}
+    .delete{background:red;color:#fff}
+
+    #message{
+      text-align:center;
+      font-weight:bold;
+      margin-bottom:10px;
+    }
+
+    #loading{
+      text-align:center;
+      margin-bottom:10px;
+      display:none;
+      color:#38bdf8;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Client Lead Management System 🚀</h1>
+  <p class="subtitle">Full Stack CRM Project</p>
+
+  <div id="message"></div>
+  <div id="loading">Loading...</div>
+
+  <div class="card">
+    <h2>Add Lead</h2>
+
+    <form id="leadForm">
+      <input type="text" id="name" placeholder="Client Name" required />
+      <input type="email" id="email" placeholder="Client Email" required />
+
+      <select id="status">
+        <option>New</option>
+        <option>Contacted</option>
+        <option>Converted</option>
+      </select>
+
+      <textarea id="notes" placeholder="Notes"></textarea>
+
+      <button type="submit">Save Lead</button>
+    </form>
+  </div>
+
+  <h2>Leads List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+</div>
+
+<script>
+const form = document.getElementById('leadForm');
+const tbody = document.getElementById('tbody');
+const API = "http://localhost:5000/leads";
+
+let leads = [];
+let editIndex = null;
+
+// 🔔 Message function
+function showMessage(text, color = "lightgreen") {
+  const msg = document.getElementById("message");
+  msg.textContent = text;
+  msg.style.color = color;
+
+  setTimeout(() => {
+    msg.textContent = "";
+  }, 2000);
+}
+
+// 📥 Fetch leads
+async function fetchLeads() {
+  document.getElementById("loading").style.display = "block";
+
+  const res = await fetch(API);
+  leads = await res.json();
+
+  document.getElementById("loading").style.display = "none";
+  render();
+}
+
+// 🎨 Render
+function render(){
+  tbody.innerHTML = '';
+
+  leads.forEach((l, i) => {
+    const tr = document.createElement('tr');
+
+    ['name','email','status','notes'].forEach(key => {
+      const td = document.createElement('td');
+      td.textContent = l[key] || '';
+      tr.appendChild(td);
+    });
+
+    const actionTd = document.createElement('td');
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.className = 'btn edit';
+    editBtn.onclick = () => startEdit(i);
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.className = 'btn delete';
+    delBtn.onclick = () => deleteLead(l._id);
+
+    actionTd.append(editBtn, delBtn);
+    tr.appendChild(actionTd);
+
+    tbody.appendChild(tr);
+  });
+}
+
+// 📦 Get data
+function getFormData(){
+  return {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    status: document.getElementById('status').value,
+    notes: document.getElementById('notes').value.trim()
+  };
+}
+
+// ✏️ Set form
+function setFormData(l){
+  document.getElementById('name').value = l.name || '';
+  document.getElementById('email').value = l.email || '';
+  document.getElementById('status').value = l.status || 'New';
+  document.getElementById('notes').value = l.notes || '';
+}
+
+// 🧹 Clear
+function clearForm(){
+  form.reset();
+  editIndex = null;
+}
+
+// ➕ Add / Update
+async function addOrUpdate(e){
+  e.preventDefault();
+  const data = getFormData();
+
+  if(!data.name || !data.email){
+    showMessage("Fill required fields ❗", "red");
+    return;
+  }
+
+  if(editIndex === null){
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    showMessage("Lead added successfully ✅");
+  } else {
+    await fetch(`${API}/${leads[editIndex]._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    showMessage("Lead updated ✏️");
+    editIndex = null;
+  }
+
+  fetchLeads();
+  clearForm();
+}
+
+// ✏️ Edit
+function startEdit(i){
+  editIndex = i;
+  setFormData(leads[i]);
+}
+
+// ❌ Delete
+async function deleteLead(id){
+  await fetch(`${API}/${id}`, { method: "DELETE" });
+  showMessage("Lead deleted ❌", "red");
+  fetchLeads();
+}
+
+// 🚀 Init
+form.addEventListener('submit', addOrUpdate);
+fetchLeads();
+</script>
+
+</body>
+</html>

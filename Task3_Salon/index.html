@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Glow Salon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0a0a0a;color:#fff}
+
+/* NAV */
+nav{
+position:fixed;width:100%;padding:20px 50px;
+display:flex;justify-content:space-between;
+background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);
+z-index:1000;
+}
+nav h2{color:#d4af37}
+nav a{color:#fff;margin:0 10px;text-decoration:none}
+
+/* HERO */
+.hero{
+height:100vh;
+background:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;
+display:flex;align-items:center;justify-content:center;text-align:center;
+position:relative;
+}
+.hero-overlay{
+position:absolute;width:100%;height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.9));
+}
+.hero-content{position:relative;z-index:2;max-width:700px;animation:fadeUp 1s ease}
+.hero h1{font-size:55px}
+.highlight{color:#d4af37;text-shadow:0 0 15px rgba(212,175,55,0.7)}
+.hero-buttons{margin-top:20px}
+.hero button{
+background:#d4af37;padding:12px 25px;border:none;border-radius:30px;margin:10px;cursor:pointer;
+}
+.secondary{background:transparent;border:1px solid #d4af37;color:#d4af37}
+
+/* HERO STATS */
+.hero-stats{
+margin-top:40px;display:flex;justify-content:center;gap:40px;
+}
+.hero-stats div{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+padding:10px 20px;border-radius:10px;
+}
+.hero-stats h3{color:#d4af37}
+
+/* STATS */
+.stats{
+display:flex;justify-content:center;gap:50px;
+padding:40px;background:#111;text-align:center
+}
+.stats h3{color:#d4af37}
+
+/* SECTION */
+.section{padding:100px 20px;text-align:center}
+
+/* LUXURY */
+.luxury-section{
+padding:120px 20px;background:linear-gradient(#0a0a0a,#000);
+}
+.luxury-container{
+display:flex;gap:60px;justify-content:center;align-items:center;flex-wrap:wrap;
+}
+.glass{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+padding:30px;border-radius:20px;
+border:1px solid rgba(255,255,255,0.1);
+transition:0.3s;
+}
+.glass:hover{
+transform:translateY(-5px);
+box-shadow:0 0 60px rgba(212,175,55,0.3);
+}
+.luxury-image img{
+width:350px;border-radius:20px;
+}
+
+/* BANNER */
+.banner{
+background:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796') center/cover;
+padding:80px;
+}
+
+/* PRICING */
+.pricing{max-width:800px;margin:auto;text-align:left}
+.pricing div{
+display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #333
+}
+
+/* BRANDS */
+.brands{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
+.brands div{color:#aaa}
+
+/* VIDEO */
+.video{
+background:url('https://images.unsplash.com/photo-1556228720-195a672e8a03') center/cover;
+height:300px;display:flex;align-items:center;justify-content:center
+}
+
+/* TESTIMONIAL */
+.testimonial{max-width:600px;margin:auto;color:#ccc}
+
+/* FORM */
+form input,select{
+width:200px;margin:10px;padding:10px;border-radius:8px;border:none
+}
+form button{background:#d4af37;border:none;padding:10px 20px}
+
+/* LOOKBOOK */
+.gallery{
+display:flex;gap:15px;flex-wrap:wrap;justify-content:center
+}
+.gallery img{
+width:250px;border-radius:10px;transition:0.3s
+}
+.gallery img:hover{transform:scale(1.05)}
+
+/* TRENDS */
+.trends{
+display:flex;gap:25px;justify-content:center;flex-wrap:wrap
+}
+.trend-card{
+position:relative;width:280px;overflow:hidden;border-radius:15px
+}
+.trend-card img{
+width:100%;height:300px;object-fit:cover;transition:0.4s
+}
+.overlay{
+position:absolute;bottom:0;width:100%;padding:20px;
+background:linear-gradient(to top,rgba(0,0,0,0.9),transparent)
+}
+.trend-card:hover img{transform:scale(1.1)}
+.trend-card:hover{box-shadow:0 0 30px rgba(212,175,55,0.4)}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;color:#777}
+
+/* ANIMATION */
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(50px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Glow Salon</h2>
+<div>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Book</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>Elegance Starts with <span class="highlight">Beautiful Hair</span></h1>
+<p>Premium salon experience crafted for you</p>
+
+<div class="hero-buttons">
+<button onclick="document.querySelector('#contact').scrollIntoView()">Book Appointment</button>
+<button class="secondary">Explore</button>
+</div>
+
+<div class="hero-stats">
+<div><h3>4.9⭐</h3><p>Rating</p></div>
+<div><h3>5K+</h3><p>Clients</p></div>
+<div><h3>10+</h3><p>Years</p></div>
+</div>
+
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+<div><h3>40+</h3><p>Experts</p></div>
+<div><h3>90%</h3><p>Retention</p></div>
+<div><h3>100%</h3><p>Satisfaction</p></div>
+</section>
+
+<!-- LUXURY -->
+<section class="luxury-section">
+<div class="luxury-container">
+
+<div class="glass">
+<h2>Crafting Confidence ✨</h2>
+<p>We blend artistry and premium care to create your perfect look.</p>
+</div>
+
+<div class="luxury-image">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+</div>
+
+</div>
+</section>
+
+<!-- BANNER -->
+<section class="banner">
+<h2>Hair Styling | Spa | Makeup</h2>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+<h2>Pricing</h2>
+<div class="pricing">
+<div><span>Hair Styling</span><span>$30</span></div>
+<div><span>Facial</span><span>$40</span></div>
+<div><span>Hair Coloring</span><span>$60</span></div>
+</div>
+</section>
+
+<!-- BRANDS -->
+<section class="section">
+<h2>Brands</h2>
+<div class="brands">
+<div>L’Oréal</div><div>Revlon</div><div>Lakmé</div><div>Clinique</div>
+</div>
+</section>
+
+<!-- VIDEO -->
+<section class="video">
+<h2>Luxury Styling Experience</h2>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section testimonial">
+<h2>Happy Clients</h2>
+<p>“A premium salon experience like never before.”</p>
+</section>
+
+<!-- BOOK -->
+<section class="section" id="contact">
+<h2>Book Appointment</h2>
+<form action="https://formspree.io/f/xojyqogn" method="POST">
+<input name="name" placeholder="Name" required>
+<input name="email" placeholder="Email" required>
+<input type="date" name="date" required><br>
+<select name="service">
+<option>Hair</option>
+<option>Facial</option>
+</select><br>
+<button>Book Now</button>
+</form>
+</section>
+
+<!-- LOOKBOOK -->
+<section class="section">
+<h2>Our Lookbook</h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796">
+<img src="https://images.unsplash.com/photo-1500840216050-6ffa99d75160">
+<img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8">
+</div>
+</section>
+
+<!-- TRENDS -->
+<section class="section">
+<h2>Trending Tips</h2>
+<div class="trends">
+
+<div class="trend-card">
+<img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8">
+<div class="overlay"><h3>Hair Styling Trends</h3></div>
+</div>
+
+<div class="trend-card">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+<div class="overlay"><h3>Luxury Hair Care</h3></div>
+</div>
+
+<div class="trend-card">
+<img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8">
+<div class="overlay"><h3>Modern Makeup</h3></div>
+</div>
+
+</div>
+</section>
+
+<footer>
+© 2026 Glow Salon
+</footer>
+
+</body>
+</html>

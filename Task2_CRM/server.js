@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // 🔗 MongoDB Connection (ONLY ONCE)
-mongoose.connect("mongodb://Vyshnavi_dasika:Vyshuvamsi78@ac-agvnerc-shard-00-00.fhmxkth.mongodb.net:27017,ac-agvnerc-shard-00-01.fhmxkth.mongodb.net:27017,ac-agvnerc-shard-00-02.fhmxkth.mongodb.net:27017/crm?ssl=true&replicaSet=atlas-qoot5i-shard-0&authSource=admin&appName=Cluster0");
+// Replace with your MongoDB URL
 
 // Connection events
 mongoose.connection.on("connected", () => {

@@ -140,7 +140,7 @@ const API = "https://future-fs-01-ebz1.onrender.com/leads";
 let leads = [];
 let editIndex = null;
 
-// 🔔 Message function
+// Message function
 function showMessage(text, color = "lightgreen") {
   const msg = document.getElementById("message");
   msg.textContent = text;
@@ -151,7 +151,7 @@ function showMessage(text, color = "lightgreen") {
   }, 2000);
 }
 
-// 📥 Fetch leads
+// Fetch leads
 async function fetchLeads() {
   document.getElementById("loading").style.display = "block";
 
@@ -162,7 +162,7 @@ async function fetchLeads() {
   render();
 }
 
-// 🎨 Render
+// Render
 function render(){
   tbody.innerHTML = '';
 
@@ -194,7 +194,7 @@ function render(){
   });
 }
 
-// 📦 Get data
+// Get data
 function getFormData(){
   return {
     name: document.getElementById('name').value.trim(),
@@ -204,7 +204,7 @@ function getFormData(){
   };
 }
 
-// ✏️ Set form
+// Set form
 function setFormData(l){
   document.getElementById('name').value = l.name || '';
   document.getElementById('email').value = l.email || '';
@@ -212,13 +212,13 @@ function setFormData(l){
   document.getElementById('notes').value = l.notes || '';
 }
 
-// 🧹 Clear
+// Clear
 function clearForm(){
   form.reset();
   editIndex = null;
 }
 
-// ➕ Add / Update
+// Add / Update
 async function addOrUpdate(e){
   e.preventDefault();
   const data = getFormData();
@@ -249,20 +249,20 @@ async function addOrUpdate(e){
   clearForm();
 }
 
-// ✏️ Edit
+//  Edit
 function startEdit(i){
   editIndex = i;
   setFormData(leads[i]);
 }
 
-// ❌ Delete
+//  Delete
 async function deleteLead(id){
   await fetch(`${API}/${id}`, { method: "DELETE" });
   showMessage("Lead deleted ❌", "red");
   fetchLeads();
 }
 
-// 🚀 Init
+//  Init
 form.addEventListener('submit', addOrUpdate);
 fetchLeads();
 </script>

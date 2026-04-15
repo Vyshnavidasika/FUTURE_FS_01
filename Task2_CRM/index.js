@@ -22,7 +22,7 @@ mongoose.connection.on("error", (err) => {
   console.log("Connection error:", err);
 });
 
-// 🧱 Schema
+// Schema
 const leadSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -30,15 +30,15 @@ const leadSchema = new mongoose.Schema({
   notes: String
 });
 
-// 📦 Model
+// Model
 const Lead = mongoose.model("Lead", leadSchema);
 
-// 🏠 Test Route
+// Test Route
 app.get("/", (req, res) => {
   res.send("CRM Backend Running");
 });
 
-// ➕ Create Lead
+// Create Lead
 app.post("/leads", async (req, res) => {
   try {
     const newLead = new Lead(req.body);
@@ -49,7 +49,7 @@ app.post("/leads", async (req, res) => {
   }
 });
 
-// 📥 Get All Leads
+// Get All Leads
 app.get("/leads", async (req, res) => {
   try {
     const leads = await Lead.find();
@@ -59,7 +59,7 @@ app.get("/leads", async (req, res) => {
   }
 });
 
-// ✏️ Update Lead
+// Update Lead
 app.put("/leads/:id", async (req, res) => {
   try {
     const updatedLead = await Lead.findByIdAndUpdate(
@@ -73,7 +73,7 @@ app.put("/leads/:id", async (req, res) => {
   }
 });
 
-// ❌ Delete Lead
+// Delete Lead
 app.delete("/leads/:id", async (req, res) => {
   try {
     await Lead.findByIdAndDelete(req.params.id);
@@ -83,7 +83,7 @@ app.delete("/leads/:id", async (req, res) => {
   }
 });
 
-// 🚀 Start Server
+//  Start Server
 app.listen(process.env.PORT ||5000, () => {
   console.log("Server running on port 5000");
 });

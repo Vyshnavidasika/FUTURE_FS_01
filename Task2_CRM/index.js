@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 // 🔗 MongoDB Connection (ONLY ONCE)
-// Replace with your MongoDB URL
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("Connection error:", err));
 
 // Connection events
 mongoose.connection.on("connected", () => {

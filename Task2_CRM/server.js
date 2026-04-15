@@ -82,6 +82,6 @@ app.delete("/leads/:id", async (req, res) => {
 });
 
 // 🚀 Start Server
-app.listen(5000, () => {
+app.listen(process.env.PORT ||5000, () => {
   console.log("Server running on port 5000");
 });
